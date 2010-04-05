@@ -6,6 +6,9 @@ jQuery(document).ready(function() {
 		'Collapse All' : false
 	});
 	
+	// Only run if no errors were returned
+	if($('.error').length > 0) return;
+	
 	// Adjust the bottom margin to fix layout
 	jQuery('fieldset.settings legend').css('margin-bottom', '0');
 

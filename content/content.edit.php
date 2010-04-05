@@ -16,28 +16,55 @@
 			$this->_pages = $this->__getPages();
 			$datasources = $this->__getDataSources();
 			
-			foreach($datasources as $datasource) {
-				$container = new XMLElement('fieldset');
-				$container->setAttribute('class', 'settings');
-				$container->appendChild(
-					new XMLElement('legend', $datasource['name'])
-				);
+			if(count($this->_pages) > 0 && count($datasources) > 0) {
+			
+				foreach($datasources as $datasource) {
+					$container = new XMLElement('fieldset');
+					$container->setAttribute('class', 'settings');
+					$container->appendChild(
+						new XMLElement('legend', $datasource['name'])
+					);
+					
+					$group = new XMLElement('div');
+					$group->setAttribute('class', 'group');
+					
+					$this->__createPageList($group, $datasource['handle']);
+					
+					$container->appendChild($group);
+					$this->Form->appendChild($container);
+				}
 				
-				$group = new XMLElement('div');
-				$group->setAttribute('class', 'group');
+			} else {
 				
-				$this->__createPageList($group, $datasource['handle']);
+				if (count($this->_pages) == 0) {
+					$container = new XMLElement('fieldset');
+					$container->setAttribute('class', 'settings error');
+					$container->appendChild(new XMLElement('legend', 'No Pages Found'));
+					$group = new XMLElement('div');
+					$group->setAttribute('class', 'group');
+					$group->appendChild(Widget::Label('Please create some pages before using QuickDS'));
+					$container->appendChild($group);
+					$this->Form->appendChild($container);
+				}
 				
-				$container->appendChild($group);
-				$this->Form->appendChild($container);
+				if (count($datasources) == 0) {
+					$container = new XMLElement('fieldset');
+					$container->setAttribute('class', 'settings error');
+					$container->appendChild(new XMLElement('legend', 'No Datasources Found'));
+					$group = new XMLElement('div');
+					$group->setAttribute('class', 'group');
+					$group->appendChild(Widget::Label('Please create some datasources before using QuickDS'));
+					$container->appendChild($group);
+					$this->Form->appendChild($container);
+				}
+				return;
+				
 			}
 			
 			$div = new XMLElement('div');
 			$div->setAttribute('class', 'actions');
-			
 			$attr = array('accesskey' => 's');
 			$div->appendChild(Widget::Input('action[save]', 'Save Changes', 'submit', $attr));
-			
 			$this->Form->appendChild($div);
 		}
 		
