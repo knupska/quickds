@@ -15,7 +15,7 @@ Do you want a datasource on 95 out of 100 pages?.. no problem!
    (If you have retrieved the extension via the download button in github you will have to  
    rename the folder to 'quickds' as it will be called 'knupska-quickds-...')  
 
-2. Enable it as usual on the 'Extensions' page (Select 'QuickDS' and choose 'Enable' from the 'With Selected' dropdown menu, then click Apply).
+2. Enable it as usual on the 'Extensions' page (Select 'QuickDS' and choose 'Enable' from the 'With Selected' dropdown menu, then click 'Apply').
 
 3. The QuickDS page can now be found under 'Blueprints'
 
