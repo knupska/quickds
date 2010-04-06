@@ -1,10 +1,12 @@
 jQuery(document).ready(function() {
 	
-	Symphony.Language.add({
-	    'Collapse' : false,
-		'Expand All' : false,
-		'Collapse All' : false
-	});
+	if(Symphony.Language.add) {
+		Symphony.Language.add({
+			'Collapse' : false,
+			'Expand All' : false,
+			'Collapse All' : false
+		});
+	}
 	
 	// Only run if no errors were returned
 	if(jQuery('.error').length > 0) return;
@@ -49,7 +51,9 @@ jQuery(document).ready(function() {
 			l_self.next().show();
 			
 			// Add the 'hide' button
-			l_self.append(' <a title="Toggle collapse" class="togglecollapse">(' + Symphony.Language.get('Collapse') + ')</a>');
+			var l_label = 'Collapse';
+			if(Symphony.Language.get) l_label = Symphony.Language.get(l_label);
+			l_self.append(' <a title="Toggle collapse" class="togglecollapse">(' + l_label + ')</a>');
 			
 			// Remove the click handler from the fieldset
 			l_target.unbind('click');
@@ -61,7 +65,9 @@ jQuery(document).ready(function() {
 	);
 	
 	// Add the 'show/hide all' button
-	jQuery('form h2').append(' - (<a title="Toggle all" class="toggleall">' + Symphony.Language.get('Expand All') + '</a>)');
+	var l_label = 'Expand All'
+	if(Symphony.Language.get) l_label = Symphony.Language.get(l_label);
+	jQuery('form h2').append(' - (<a title="Toggle all" class="toggleall">' + l_label + '</a>)');
 	
 	// Handle the actual 'show/hide all' toggle
 	jQuery('a.toggleall').toggle(
@@ -75,7 +81,9 @@ jQuery(document).ready(function() {
 			});
 			
 			// Switch button text
-			jQuery('a.toggleall').text(Symphony.Language.get('Collapse All'));
+			var l_label = 'Collapse All';
+			if(Symphony.Language.get) l_label = Symphony.Language.get(l_label);
+			jQuery('a.toggleall').text(l_label);
 		},
 		function() {
 			
@@ -86,12 +94,12 @@ jQuery(document).ready(function() {
 				}
 			});
 			
-			
 			// Switch button text
-			jQuery('a.toggleall').text(Symphony.Language.get('Expand All'));
+			var l_label = 'Expand All';
+			if(Symphony.Language.get) l_label = Symphony.Language.get(l_label);
+			jQuery('a.toggleall').text(l_label);
 		}
 	);
-	
 	
 	// Force an initial collapse on all elements
 	// (Doesn't matter if there is delay, this is just to simplify the UI)

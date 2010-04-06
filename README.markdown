@@ -4,10 +4,10 @@ QuickDS
 QuickDS allows you to quickly view, add & remove datasources from your pages in Symphony.  
 Do you want a datasource on 95 out of 100 pages?.. no problem!
 
-- Version: 1.0
+- Version: 1.1
 - Author: [Nathan Martin](mailto:nathan@knupska.com)
 - Build Date: 2010-04-05
-- Requirements: Symphony 2.0.8RC1 (Very likely compatible with earlier versions, only tested in 2.0.8RC1)
+- Requirements: Symphony 2.0.6 or above
 
 ### Installation
 
