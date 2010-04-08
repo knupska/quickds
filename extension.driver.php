@@ -5,7 +5,7 @@
 		public function about() {
 			return array(
 				'name'			=> 'QuickDS',
-				'version'		=> '1.0',
+				'version'		=> '1.2',
 				'release-date'	=> '2010-04-05',
 				'author'		=> array(
 					'name'			=> 'Nathan Martin',

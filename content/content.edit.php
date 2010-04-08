@@ -19,17 +19,16 @@
 			if(count($this->_pages) > 0 && count($datasources) > 0) {
 			
 				foreach($datasources as $datasource) {
-					$container = new XMLElement('fieldset');
-					$container->setAttribute('class', 'settings');
-					$container->appendChild(
-						new XMLElement('legend', $datasource['name'])
-					);
-					
 					$group = new XMLElement('div');
 					$group->setAttribute('class', 'group');
 					
-					$this->__createPageList($group, $datasource['handle']);
+					$total_selected = $this->__createPageList($group, $datasource['handle']);
 					
+					$container = new XMLElement('fieldset');
+					$container->setAttribute('class', 'settings');
+					$container->appendChild(
+						new XMLElement('legend', $datasource['name'] . ' (' . $total_selected . ')')
+					);
 					$container->appendChild($group);
 					$this->Form->appendChild($container);
 				}
@@ -86,8 +85,10 @@
 		
 		public function __createPageList($context, $datasource) {
 			$options = array();
+			$total_selected = 0;
 			foreach ($this->_pages as $page) {
 				$selected = in_array($datasource, explode(',', $page['data_sources']));
+				if($selected) $total_selected++;
 				
 				$options[] = array(
 					$page['id'], $selected, '/' . $this->_Parent->resolvePagePath($page['id'])
@@ -102,6 +103,7 @@
 			));
 			
 			$context->appendChild($section);
+			return $total_selected;
 		}
 		
 		public function __actionIndex() {
